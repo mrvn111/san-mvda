@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz San Valentín</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #7b1fa2, #ba68c8);
+            color: white;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        h1 {
+            color: #ffd700;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        #contador {
+            font-size: 1.5em;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-top: 20px;
+            font-weight: bold;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+        }
+        .mensaje {
+            font-size: 1.3em;
+            margin-top: 20px;
+        }
+        img {
+            width: 200px;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.4);
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+        }
+        .tulipanes {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 150px;
+            background: url('tulipanes.png') no-repeat center bottom;
+            background-size: contain;
+        }
+        .estrella {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: parpadeo 1.5s infinite alternate;
+        }
+        @keyframes parpadeo {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💜 Feliz San Valentín 💜</h1>
+        <img src="file:///C:/Users/Desktop/Desktop/IMG_20250210_223505.jpg" alt="Nuestra Foto Juntos">
+        <p id="contador"></p>
+        <p class="mensaje">Primeramente te agradezco por ser mi san valentin, sabes lo mucho que significas para mi y todo aquello que pasamos significan mucho para mi y no sera el ultimo San Valentin que pasemos juntos, siempre estare ahi para ti y lo sabes, no necesitamos un dia en especial para festejar que estemos juntos, todos los dias son especiales para mi desde el dia que te conoci, solo queria darte todo estos regalos y detalles por que te mereces eso y mucho mas. 💜</p>
+        <div class="tulipanes"></div>
+    </div>
+    
+    <script>
+        var fechaInicio = new Date(2024, 8, 9);
+        
+        function actualizarContador() {
+            var ahora = new Date();
+            var añoInicio = fechaInicio.getFullYear();
+            var mesInicio = fechaInicio.getMonth();
+            var diaInicio = fechaInicio.getDate();
+            
+            var añoActual = ahora.getFullYear();
+            var mesActual = ahora.getMonth();
+            var diaActual = ahora.getDate();
+            
+            var meses = (añoActual - añoInicio) * 12 + (mesActual - mesInicio);
+            var dias = diaActual - diaInicio;
+            if (dias < 0) {
+                meses--;
+                var ultimoMes = new Date(añoActual, mesActual, 0).getDate();
+                dias += ultimoMes;
+            }
+            
+            var diferencia = ahora - fechaInicio;
+            var horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            var segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+            
+            document.getElementById("contador").innerHTML = `💜 <strong>${meses}</strong> meses, <strong>${dias}</strong> días, <strong>${horas}</strong> horas, <strong>${minutos}</strong> minutos y <strong>${segundos}</strong> segundos 💜`;
+        }
+        
+        setInterval(actualizarContador, 1000);
+        actualizarContador();
+
+        function crearEstrellas() {
+            for (let i = 0; i < 30; i++) {
+                let estrella = document.createElement("div");
+                estrella.classList.add("estrella");
+                estrella.style.top = Math.random() * 100 + "%";
+                estrella.style.left = Math.random() * 100 + "%";
+                estrella.style.animationDelay = Math.random() * 2 + "s";
+                document.body.appendChild(estrella);
+            }
+        }
+        crearEstrellas();
+    </script>
+</body>
+</html>
